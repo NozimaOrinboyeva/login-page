@@ -1,0 +1,128 @@
+/* App.css yoki Login.css ga yozish mumkin */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.loginPage__title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #333333;
+}
+
+.loginPage__input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.loginPage__text {
+    text-align: left;
+    font-size: 14px;
+    color: #555555;
+}
+
+.loginPage__inputt {
+    padding: 10px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.loginPage__inputt:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+.loginPage__check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #555555;
+}
+
+.loginPage__check input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+}
+
+.loginPage__button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #6c63ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginPage__button:hover {
+    background-color: #574fd6;
+}
+
+.loginPage__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.loginPage__bottom a {
+    color: #6c63ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.loginPage__bottom a:hover {
+    color: #574fd6;
+}
+
+.language-switcher {
+    position: absolute;
+    bottom: 5px;
+    right: 155px;
+    padding: 8px 12px;
+    font-size: 50px;
+}
+
+.language-switcher select {
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.language-switcher select:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
