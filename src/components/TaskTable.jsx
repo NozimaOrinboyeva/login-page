@@ -32,7 +32,6 @@ const TaskTable = () => {
     setOpen(false);
   };
 
-  // 👉 COLUMNS shu yerda bo‘lishi shart!
   const columns = [
     { title: "Full Address", dataIndex: "fullAddress" },
     { title: "Street", dataIndex: "street" },
@@ -46,7 +45,7 @@ const TaskTable = () => {
       render: (_, record) => (
         <div className="actions">
 
-          {/* VIEW */}
+          { }
           <button
             className="action-btn green"
             onClick={() => {
@@ -57,12 +56,12 @@ const TaskTable = () => {
             <i className="la la-eye"></i>
           </button>
 
-          {/* EDIT */}
+          { }
           <button className="action-btn blue">
             <i className="la la-edit"></i>
           </button>
 
-          {/* DELETE */}
+          { }
           <button className="action-btn red">
             <i className="la la-trash"></i>
           </button>

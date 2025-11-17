@@ -1,0 +1,25 @@
+.view-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.view-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    /* background: #fafafa; */
+    border-radius: 6px;
+    /* border: 1px solid #eee; */
+}
+
+.view-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.view-value {
+    font-weight: 500;
+    color: #222;
+}

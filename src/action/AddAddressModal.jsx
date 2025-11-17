@@ -18,6 +18,8 @@ const AddAddressModal = ({ open, onClose, onSubmit }) => {
             onCancel={onClose}
             onOk={handleOk}
             okText="Add"
+            width={500}
+            bodyStyle={{ padding: "20px 24px" }}
         >
             <Form form={form} layout="vertical">
                 <Form.Item name="fullAddress" label="Full Address" rules={[{ required: true }]}>

@@ -4,14 +4,16 @@ import TaskTable from "./components/TaskTable"; // agar hali import qilinmagan b
 import { Table } from "antd";
 import AddAddressModal from "./action/AddAddressModal";
 import ViewAddressModal from "./action/ViewAddressModal";
+import AddressTable from "./components/AddressTable";
 
 const App = () => {
   return (
     <>
-      <LoginForm />
-      <TaskTable />
-      <AddAddressModal />
-      <ViewAddressModal />
+      {/* <LoginForm /> */}
+      <AddressTable />
+      {/* <TaskTable /> */}
+      {/* <AddAddressModal /> */}
+      {/* <ViewAddressModal /> */}
     </>
   );
 };
