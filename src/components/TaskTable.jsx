@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Table, Button } from "antd";
 import AddAddressModal from "../action/AddAddressModal";
-import ViewAddressModal from "../action/ViewAddressModal";
+import AddressViewModal from "../action/AddressViewModal";
 import { PlusOutlined } from "@ant-design/icons";
 import "./TaskTable.css";
 
 const TaskTable = () => {
   const [open, setOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [viewRecord, setViewRecord] = useState(null);
 
   const [data, setData] = useState([
     {
@@ -32,6 +32,11 @@ const TaskTable = () => {
     setOpen(false);
   };
 
+  const openViewModal = (record) => {
+    setViewRecord(record);
+    setViewOpen(true);
+  };
+
   const columns = [
     { title: "Full Address", dataIndex: "fullAddress" },
     { title: "Street", dataIndex: "street" },
@@ -46,16 +51,7 @@ const TaskTable = () => {
         <div className="actions">
 
           { }
-          <button
-            className="action-btn green"
-            onClick={() => {
-              setSelectedItem(record);
-              setViewOpen(true);
-            }}
-          >
-            <i className="la la-eye"></i>
-          </button>
-
+          <Button onClick={() => openViewModal(record)}>View</Button>
           { }
           <button className="action-btn blue">
             <i className="la la-edit"></i>
@@ -98,11 +94,12 @@ const TaskTable = () => {
         onSubmit={handleAddData}
       />
 
-      <ViewAddressModal
+      <AddressViewModal
         open={viewOpen}
         onClose={() => setViewOpen(false)}
-        data={selectedItem}
+        record={viewRecord}
       />
+
     </div>
   );
 };

@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, message } from "antd";
-import { getAddresses, deleteAddress } from "../api/address";
+import { getAddresses, deleteAddress, updateAddress } from "../api/address";
+import AddressViewModal from "../action/AddressViewModal";
+import AddressEditModal from "../action/AddressEditModal";
+
+
 
 const AddressTable = () => {
     const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [viewOpen, setViewOpen] = useState(false);
+    const [currentRecord, setCurrentRecord] = useState(null);
+    const [editOpen, setEditOpen] = useState(false);
+    const [editRecord, setEditRecord] = useState(null);
 
     const loadData = async () => {
         setLoading(true);
@@ -15,6 +23,11 @@ const AddressTable = () => {
             message.error("Failed to load addresses");
         }
         setLoading(false);
+    };
+
+    const handleView = (record) => {
+        setCurrentRecord(record);
+        setViewOpen(true);
     };
 
     useEffect(() => {
@@ -30,6 +43,25 @@ const AddressTable = () => {
             message.error("Failed to delete address");
         }
     };
+
+
+    const handleEdit = (record) => {
+        setEditRecord(record);
+        setEditOpen(true);
+    };
+
+    const handleSave = async (id, values) => {
+        try {
+            await updateAddress(id, values);
+            message.success("Address updated!");
+            setEditOpen(false);
+            loadData();
+        } catch (err) {
+            message.error("Failed to update address");
+        }
+    };
+
+
 
     const columns = [
         { title: "Full Name", dataIndex: "fullName", key: "fullName" },
@@ -110,8 +142,23 @@ const AddressTable = () => {
                     bordered
                 />
             </div>
+
+            <AddressViewModal
+                open={viewOpen}
+                onClose={() => setViewOpen(false)}
+                record={currentRecord}
+            />
+
+            <AddressEditModal
+                open={editOpen}
+                onClose={() => setEditOpen(false)}
+                record={editRecord}
+                onSave={handleSave}
+            />
+
         </div>
     );
+
 };
 
 export default AddressTable;
