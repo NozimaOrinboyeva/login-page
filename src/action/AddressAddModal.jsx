@@ -1,24 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Modal, Form, Input, Button } from "antd";
 
-const AddressEditModal = ({ open, onClose, record, onSave }) => {
+const AddressAddModal = ({ open, onClose, onSave }) => {
     const [form] = Form.useForm();
-
-    useEffect(() => {
-        if (record) {
-            form.setFieldsValue(record);
-        }
-    }, [record]);
 
     const handleSubmit = () => {
         form.validateFields().then(values => {
-            onSave(record.id, values);   
+            onSave(values);
+            form.resetFields();
         });
     };
 
     return (
         <Modal
-            title="Edit Address"
+            title="Add New Address"
             open={open}
             onCancel={onClose}
             centered
@@ -28,25 +23,20 @@ const AddressEditModal = ({ open, onClose, record, onSave }) => {
                     Save
                 </Button>
             ]}
-            getContainer={document.body}
         >
             <Form layout="vertical" form={form}>
                 <Form.Item label="Full Name" name="fullName" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-
                 <Form.Item label="Phone" name="phone" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-
                 <Form.Item label="City" name="city" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-
                 <Form.Item label="District" name="district" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-
                 <Form.Item label="Street" name="street" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
@@ -55,4 +45,4 @@ const AddressEditModal = ({ open, onClose, record, onSave }) => {
     );
 };
 
-export default AddressEditModal;
+export default AddressAddModal;

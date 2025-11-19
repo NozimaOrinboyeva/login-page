@@ -23,4 +23,4 @@ export const addAddress = (data) => axios.post(API_URL, data);
 export const deleteAddress = (id) => axios.delete(`${API_URL}/${id}`);
 
 export const updateAddress = (id, data) =>
-    axios.put(`${API_URL}/${id}`, data);
+    axios.patch(`${API_URL}/${id}`, data);

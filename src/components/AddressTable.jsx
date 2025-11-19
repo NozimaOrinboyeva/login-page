@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, message } from "antd";
-import { getAddresses, deleteAddress, updateAddress } from "../api/address";
+
 import AddressViewModal from "../action/AddressViewModal";
 import AddressEditModal from "../action/AddressEditModal";
+import AddressAddModal from "../action/AddressAddModal";
 
-
+import {
+    getAddresses,
+    deleteAddress,
+    updateAddress,
+    addAddress
+} from "../api/address";
 
 const AddressTable = () => {
     const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(false);
+
     const [viewOpen, setViewOpen] = useState(false);
     const [currentRecord, setCurrentRecord] = useState(null);
+
     const [editOpen, setEditOpen] = useState(false);
     const [editRecord, setEditRecord] = useState(null);
+
+    const [addOpen, setAddOpen] = useState(false);
 
     const loadData = async () => {
         setLoading(true);
@@ -25,25 +35,24 @@ const AddressTable = () => {
         setLoading(false);
     };
 
+    useEffect(() => {
+        loadData();
+    }, []);
+
     const handleView = (record) => {
         setCurrentRecord(record);
         setViewOpen(true);
     };
-
-    useEffect(() => {
-        loadData();
-    }, []);
 
     const handleDelete = async (id) => {
         try {
             await deleteAddress(id);
             message.success("Address deleted!");
             loadData();
-        } catch (err) {
+        } catch {
             message.error("Failed to delete address");
         }
     };
-
 
     const handleEdit = (record) => {
         setEditRecord(record);
@@ -56,84 +65,78 @@ const AddressTable = () => {
             message.success("Address updated!");
             setEditOpen(false);
             loadData();
-        } catch (err) {
+        } catch {
             message.error("Failed to update address");
         }
     };
 
-
+    const handleAdd = async (values) => {
+        try {
+            await addAddress(values);
+            message.success("Address added!");
+            setAddOpen(false);
+            loadData();
+        } catch {
+            message.error("Failed to add address");
+        }
+    };
 
     const columns = [
-        { title: "Full Name", dataIndex: "fullName", key: "fullName" },
-        { title: "Phone", dataIndex: "phone", key: "phone" },
-        { title: "City", dataIndex: "city", key: "city" },
-        { title: "District", dataIndex: "district", key: "district" },
-        { title: "Street", dataIndex: "street", key: "street" },
+        { title: "Full Name", dataIndex: "fullName" },
+        { title: "Phone", dataIndex: "phone" },
+        { title: "City", dataIndex: "city" },
+        { title: "District", dataIndex: "district" },
+        { title: "Street", dataIndex: "street" },
         {
             title: "Action",
-            key: "action",
             render: (_, record) => (
-
-                
                 <div style={{ display: "flex", gap: "8px" }}>
+                    {  }
+                    <button className="action-btn view-btn" onClick={() => handleView(record)}>
+                        <i className="lar la-eye"></i>
+                    </button>
 
                     { }
-                    <Button
-                        shape="circle"
-                        style={{
-                            border: "1px solid #91d5ff",
-                            color: "#1890ff",
-                            transition: ".2s",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = "#bae7ff")}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = "#e6f7ff")}
-                        onClick={() => handleView(record)}
-                    >
-                        <i className="lar la-eye" style={{ fontSize: "18px" }}></i>
-                    </Button>
+                    <button className="action-btn edit-btn" onClick={() => handleEdit(record)}>
+                        <i className="las la-edit"></i>
+                    </button>
 
-                    { }
-                    <Button
-                        shape="circle"
-                        style={{
-                            border: "1px solid #b7eb8f",
-                            color: "#52c41a",
-                            transition: ".2s",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = "#d9f7be")}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = "#f6ffed")}
-                        onClick={() => handleEdit(record)}
-                    >
-                        <i className="las la-edit" style={{ fontSize: "18px" }}></i>
-                    </Button>
-
-                    { }
-                    <Button
-                        danger
-                        shape="circle"
-                        style={{
-                            border: "1px solid #ffa39e",
-                            transition: ".2s",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = "#ffccc7")}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = "#fff1f0")}
-                        onClick={() => handleDelete(record.id)}
-                    >
-                        <i className="las la-trash" style={{ fontSize: "18px" }}></i>
-                    </Button>
-
+                    {  }
+                    <button className="action-btn delete-btn" onClick={() => handleDelete(record.id)}>
+                        <i className="las la-trash"></i>
+                    </button>
                 </div>
+            )
+        }
 
-            ),
-        },
     ];
-
-
 
     return (
         <div className="wrapper">
             <div style={{ padding: 20 }}>
-                <h2>Address</h2>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 20
+                }}>
+                    <h2 style={{ margin: 0 }}>Address</h2>
+
+                    <button
+                        onClick={() => setAddOpen(true)}
+                        style={{
+                            padding: "8px 14px",
+                            border: "none",
+                            borderRadius: 6,
+                            backgroundColor: "#1677ff",
+                            color: "#fff",
+                            cursor: "pointer",
+                        }}
+                    >
+                        Add Address
+                    </button>
+                </div>
+
                 <Table
                     columns={columns}
                     dataSource={addresses}
@@ -156,9 +159,13 @@ const AddressTable = () => {
                 onSave={handleSave}
             />
 
+            <AddressAddModal
+                open={addOpen}
+                onClose={() => setAddOpen(false)}
+                onSave={handleAdd}
+            />
         </div>
     );
-
 };
 
 export default AddressTable;

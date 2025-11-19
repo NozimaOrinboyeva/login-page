@@ -1,6 +1,8 @@
 import React from "react";
 import AddressTable from "./components/AddressTable";
 import AddressViewModal from "./action/AddressViewModal";
+import AddressAddModal from "./action/AddressAddModal";
+
 
 const App = () => {
   return (
@@ -8,6 +10,7 @@ const App = () => {
       {/* <LoginForm /> */}
       <AddressTable />
       <AddressViewModal />
+      <AddressAddModal />
       {/* <TaskTable /> */}
       {/* <AddAddressModal /> */}
       {/* <ViewAddressModal /> */}
